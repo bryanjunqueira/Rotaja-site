@@ -1,0 +1,15 @@
+/* App.css — Global overrides and utility classes */
+#root {
+  min-height: 100vh;
+}
+
+/* Ensure full coverage */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Smooth anchor scroll offset for fixed header */
+[id] {
+  scroll-margin-top: 80px;
+}
