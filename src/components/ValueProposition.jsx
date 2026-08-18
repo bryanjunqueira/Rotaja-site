@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Building2, Truck, CheckCircle2, DollarSign, Shield, Zap, MapPin, FileCheck, ArrowRight, BarChart3, Clock, Users } from 'lucide-react';
 
-export default function ValueProposition({ onOpenDownloadModal }) {
+export default function ValueProposition({ onOpenDownloadModal, onOpenContact }) {
   const [activeTab, setActiveTab] = useState('empresas');
 
   const shipperBenefits = [
@@ -257,18 +257,19 @@ export default function ValueProposition({ onOpenDownloadModal }) {
 
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             {activeTab === 'empresas' ? (
-              <a
-                href="#contato"
+              <button
+                onClick={onOpenContact}
                 className="btn-primary"
                 style={{
                   backgroundColor: '#1a56db',
                   padding: '14px 28px',
                   borderRadius: '12px',
+                  cursor: 'pointer',
                 }}
               >
                 Solicitar Demonstração
                 <ArrowRight size={18} />
-              </a>
+              </button>
             ) : (
               <button
                 onClick={onOpenDownloadModal}

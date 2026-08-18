@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check, X, ShieldAlert, Sparkles, TrendingUp, ArrowRight } from 'lucide-react';
 
-export default function MarketComparison({ onOpenDownloadModal }) {
+export default function MarketComparison({ onOpenDownloadModal, onOpenContact }) {
   const comparisonData = [
     {
       feature: 'Tempo para Contratação do Frete',
@@ -181,13 +181,13 @@ export default function MarketComparison({ onOpenDownloadModal }) {
               Experimentar o RotaJá
               <ArrowRight size={16} />
             </button>
-            <a
-              href="#contato"
+            <button
+              onClick={onOpenContact}
               className="btn-secondary"
-              style={{ borderRadius: '12px' }}
+              style={{ borderRadius: '12px', cursor: 'pointer' }}
             >
               Falar com Especialista
-            </a>
+            </button>
           </div>
         </div>
 

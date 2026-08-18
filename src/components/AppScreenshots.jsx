@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Smartphone, CheckCircle, LayoutDashboard, Truck, Building2, Receipt, ShieldCheck, ArrowRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Smartphone, CheckCircle, LayoutDashboard, Truck, Building2, Receipt, ShieldCheck, ArrowRight, X, ZoomIn } from 'lucide-react';
 import appDashboard from '../assets/image.png';
 import appMotorista from '../assets/image copy.png';
 import appEmpresa from '../assets/image copy 2.png';
@@ -7,6 +7,22 @@ import appFretes from '../assets/image copy 3.png';
 
 export default function AppScreenshots({ onOpenDownloadModal }) {
   const sectionRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedImage(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = selectedImage ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedImage]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -153,6 +169,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
                     alignItems: 'center',
                     direction: 'ltr',
                   }}
+                  className="app-phone-arrive"
                 >
                   <div
                     style={{
@@ -163,9 +180,42 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
                       padding: '10px',
                       boxShadow: '0 24px 50px -12px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(15, 23, 42, 0.08)',
                       transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                      cursor: 'zoom-in',
                     }}
                     className="app-phone-card"
+                    onClick={() => setSelectedImage(screen)}
+                    role="button"
+                    aria-label={`Ampliar screenshot: ${screen.title}`}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setSelectedImage(screen);
+                      }
+                    }}
                   >
+                    {/* Zoom hint */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '18px',
+                        right: '18px',
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(15, 23, 42, 0.72)',
+                        backdropFilter: 'blur(4px)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 12,
+                        color: '#ffffff',
+                        transition: 'all 0.2s ease',
+                      }}
+                      className="app-phone-zoom-hint"
+                    >
+                      <ZoomIn size={16} />
+                    </div>
                     {/* Notch / Dynamic Island */}
                     <div
                       style={{
@@ -207,6 +257,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
 
                 {/* Explanation Content */}
                 <div
+                  className="app-phone-copy"
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -341,10 +392,189 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
         </div>
       </div>
 
+      {/* Lightbox Modal — fullscreen image viewer */}
+      {selectedImage && (
+        <div
+          className="app-lightbox"
+          onClick={() => setSelectedImage(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Imagem ampliada: ${selectedImage.title}`}
+        >
+          <div
+            className="app-lightbox-backdrop"
+            onClick={() => setSelectedImage(null)}
+          />
+          <button
+            className="app-lightbox-close"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Fechar imagem ampliada"
+          >
+            <X size={26} />
+          </button>
+
+          <figure className="app-lightbox-figure" onClick={(e) => e.stopPropagation()}>
+            <div className="app-lightbox-screen">
+              <img src={selectedImage.image} alt={selectedImage.title} />
+            </div>
+            <figcaption>
+              <span className="app-lightbox-title">{selectedImage.title}</span>
+            </figcaption>
+          </figure>
+        </div>
+      )}
+
       <style>{`
         .app-phone-card:hover {
           transform: translateY(-6px);
           box-shadow: 0 30px 60px -12px rgba(26, 86, 219, 0.25) !important;
+        }
+        .app-phone-arrive {
+          opacity: 0;
+          will-change: transform;
+        }
+        [data-direction="left"] .app-phone-arrive {
+          transform: translateX(-130vw);
+          transition: opacity 0.5s ease 0.15s, transform 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+        [data-direction="right"] .app-phone-arrive {
+          transform: translateX(130vw);
+          transition: opacity 0.5s ease 0.15s, transform 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+        .scroll-reveal.scroll-visible .app-phone-arrive {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        .app-phone-copy {
+          opacity: 0;
+          transform: translateY(36px);
+          transition: opacity 0.7s ease 0.3s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+        }
+        .scroll-reveal.scroll-visible .app-phone-copy {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .app-phone-arrive, .app-phone-copy {
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+          }
+        }
+        .app-phone-card:hover .app-phone-zoom-hint {
+          background-color: rgba(26, 86, 219, 0.95);
+          transform: scale(1.08);
+        }
+        .app-lightbox {
+          position: fixed;
+          inset: 0;
+          z-index: 2000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          animation: lightboxFade 0.25s ease;
+        }
+        .app-lightbox-backdrop {
+          position: absolute;
+          inset: 0;
+          background-color: rgba(9, 18, 31, 0.92);
+          backdrop-filter: blur(8px);
+          animation: backdropFade 0.3s ease;
+        }
+        .app-lightbox-close {
+          position: absolute;
+          top: 22px;
+          right: 22px;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.12);
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.2s ease;
+        }
+        .app-lightbox-close:hover {
+          background-color: rgba(255, 255, 255, 0.25);
+          transform: rotate(90deg);
+        }
+        .app-lightbox-figure {
+          position: relative;
+          z-index: 5;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 22px;
+          max-width: min(560px, 92vw);
+          animation: lightboxZoom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .app-lightbox-screen {
+          width: 100%;
+          max-height: 74vh;
+          border-radius: 36px;
+          overflow: hidden;
+          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14), 0 30px 70px rgba(0, 0, 0, 0.55);
+          background-color: #0f172a;
+          animation: lightboxShake 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .app-lightbox-screen img {
+          width: 100%;
+          height: auto;
+          max-height: 74vh;
+          object-fit: contain;
+          display: block;
+        }
+        .app-lightbox-figure figcaption {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          text-align: center;
+        }
+        .app-lightbox-tag {
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: #93c5fd;
+          background-color: rgba(26, 86, 219, 0.25);
+          padding: 5px 14px;
+          border-radius: 9999px;
+        }
+        .app-lightbox-title {
+          font-family: 'Plus Jakarta Sans', Inter, sans-serif;
+          font-size: clamp(1rem, 2vw, 1.25rem);
+          font-weight: 700;
+          color: #ffffff;
+          max-width: 480px;
+        }
+        @keyframes lightboxFade {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes backdropFade {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes lightboxZoom {
+          from { opacity: 0; transform: scale(0.86) translateY(16px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes lightboxShake {
+          0% { transform: scale(0.8); }
+          60% { transform: scale(1.05); }
+          100% { transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .app-lightbox-figure, .app-lightbox-screen, .app-lightbox, .app-lightbox-backdrop {
+            animation: none !important;
+          }
         }
       `}</style>
     </section>

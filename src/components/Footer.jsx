@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUp, Mail, PhoneCall, ShieldCheck, MapPin } from 'lucide-react';
 import logoNoBg from '../assets/WhatsApp_Image_2026-08-10_at_20.09.11-removebg-preview.png';
 
-export default function Footer({ onOpenDownloadModal }) {
+export default function Footer({ onOpenDownloadModal, onOpenContact }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -117,9 +117,12 @@ export default function Footer({ onOpenDownloadModal }) {
                 </a>
               </li>
               <li>
-                <a href="#contato" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
-                  Fale com a Equipe
-                </a>
+                <button
+                onClick={onOpenContact}
+                style={{ background: 'none', color: '#94a3b8', fontSize: '0.9rem', textAlign: 'left', cursor: 'pointer', padding: 0 }}
+              >
+                Fale com a Equipe
+              </button>
               </li>
               <li>
                 <button onClick={onOpenDownloadModal} style={{ background: 'none', color: '#94a3b8', fontSize: '0.9rem', textAlign: 'left', cursor: 'pointer' }}>

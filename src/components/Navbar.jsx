@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowDownToLine, ChevronRight, Truck, Building2, ShieldCheck, Headphones, Smartphone, HelpCircle } from 'lucide-react';
-import logoNoBg from '../assets/WhatsApp_Image_2026-08-10_at_20.09.11-removebg-preview.png';
+import logoRotaJa from '../assets/Rota Já - Logo V2.png';
 
-export default function Navbar({ onOpenDownloadModal }) {
+export default function Navbar({ onOpenDownloadModal, onOpenContact, onGoHome }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -17,10 +17,19 @@ export default function Navbar({ onOpenDownloadModal }) {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (onGoHome) onGoHome();
+    setTimeout(() => {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 60);
+  };
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (onOpenContact) onOpenContact();
   };
 
   return (
@@ -31,7 +40,7 @@ export default function Navbar({ onOpenDownloadModal }) {
           top: isScrolled && !menuOpen ? '12px' : '0',
           left: isScrolled && !menuOpen ? '50%' : '0',
           right: isScrolled && !menuOpen ? 'auto' : '0',
-          width: isScrolled && !menuOpen ? 'min(92%, 960px)' : '100%',
+          width: isScrolled && !menuOpen ? 'max-content' : '100%',
           transform: isScrolled && !menuOpen ? 'translateX(-50%)' : 'none',
           zIndex: 1000,
           backgroundColor: menuOpen
@@ -65,26 +74,28 @@ export default function Navbar({ onOpenDownloadModal }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: isScrolled && !menuOpen ? '56px' : '72px',
-            padding: isScrolled && !menuOpen ? '0 20px' : '0 36px',
+            height: isScrolled && !menuOpen ? '48px' : '96px',
+            padding: isScrolled && !menuOpen ? '0 10px' : '0 36px',
             maxWidth: isScrolled && !menuOpen ? 'none' : '100%',
-            margin: '0 auto',
+            justifyContent: isScrolled && !menuOpen ? 'center' : 'space-between',
             transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
+          {isScrolled && !menuOpen ? null : (
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
               setMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (onGoHome) onGoHome();
+              else window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             className="nav-logo-link"
             aria-label="RotaJá Início"
           >
             <div className={`nav-logo-badge ${isScrolled || menuOpen ? 'nav-logo-badge--compact' : 'nav-logo-badge--hero'}`}>
               <img
-                src={logoNoBg}
+                src={logoRotaJa}
                 alt="RotaJá"
                 className={`nav-logo-img ${
                   menuOpen
@@ -96,6 +107,7 @@ export default function Navbar({ onOpenDownloadModal }) {
               />
             </div>
           </a>
+          )}
 
           {!isScrolled ? (
             <button
@@ -123,7 +135,7 @@ export default function Navbar({ onOpenDownloadModal }) {
                 onClick={onOpenDownloadModal}
                 className="nav-action-btn nav-action-btn--primary nav-action-btn--compact"
               >
-                <ArrowDownToLine size={18} strokeWidth={2.5} />
+                <ArrowDownToLine size={22} strokeWidth={2.5} />
                 <span>Baixe o app</span>
               </button>
               <button
@@ -134,12 +146,12 @@ export default function Navbar({ onOpenDownloadModal }) {
               >
                 {menuOpen ? (
                   <>
-                    <X size={20} strokeWidth={2.5} />
+                    <X size={24} strokeWidth={2.5} />
                     <span>Fechar</span>
                   </>
                 ) : (
                   <>
-                    <Menu size={20} strokeWidth={2.5} />
+                    <Menu size={24} strokeWidth={2.5} />
                     <span>Menu</span>
                   </>
                 )}
@@ -191,42 +203,42 @@ export default function Navbar({ onOpenDownloadModal }) {
                   onClick={(e) => handleNavClick(e, '#solucoes')}
                   style={{ color: '#334155', fontWeight: 600, fontSize: '0.94rem', textDecoration: 'none' }}
                 >
-                  Ganhe como Motorista
+                  Motorista
                 </a>
                 <a
                   href="#solucoes"
                   onClick={(e) => handleNavClick(e, '#solucoes')}
                   style={{ color: '#334155', fontWeight: 600, fontSize: '0.94rem', textDecoration: 'none' }}
                 >
-                  Para Empresas & Indústrias
+                  Empresa
                 </a>
                 <a
                   href="#aplicativo"
                   onClick={(e) => handleNavClick(e, '#aplicativo')}
                   style={{ color: '#334155', fontWeight: 600, fontSize: '0.94rem', textDecoration: 'none' }}
                 >
-                  Aplicativo
+                  App
                 </a>
                 <a
                   href="#como-funciona"
                   onClick={(e) => handleNavClick(e, '#como-funciona')}
                   style={{ color: '#334155', fontWeight: 600, fontSize: '0.94rem', textDecoration: 'none' }}
                 >
-                  Como Funciona
+                  Funcionamento
                 </a>
                 <a
                   href="#diferenciais"
                   onClick={(e) => handleNavClick(e, '#diferenciais')}
                   style={{ color: '#334155', fontWeight: 600, fontSize: '0.94rem', textDecoration: 'none' }}
                 >
-                  Segurança & ANTT
+                  Segurança e ANTT
                 </a>
                 <a
                   href="#contato"
-                  onClick={(e) => handleNavClick(e, '#contato')}
+                  onClick={handleContactClick}
                   style={{ color: '#334155', fontWeight: 600, fontSize: '0.94rem', textDecoration: 'none' }}
                 >
-                  Suporte & Contato
+                  Suporte e Contato
                 </a>
               </div>
 
@@ -398,12 +410,13 @@ export default function Navbar({ onOpenDownloadModal }) {
         }
         .nav-logo-badge--hero {
           background: #ffffff;
-          padding: 8px 20px;
+          padding: 10px 24px;
           border-radius: 9999px;
           box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25), 0 0 0 2.5px rgba(255, 255, 255, 0.9);
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          margin-top: 24px;
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
         .nav-logo-badge--hero:hover {
@@ -422,7 +435,7 @@ export default function Navbar({ onOpenDownloadModal }) {
           transition: height 0.35s ease;
         }
         .nav-logo-img--hero-inline {
-          height: 58px;
+          height: 66px;
         }
         .nav-logo-img--scrolled {
           height: 44px;
@@ -473,11 +486,11 @@ export default function Navbar({ onOpenDownloadModal }) {
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32), 0 0 0 2px #ffffff;
         }
         .nav-action-btn--compact {
-          padding: 9px 18px;
-          font-size: 0.88rem;
-          font-weight: 600;
+          padding: 10px 22px;
+          font-size: 1rem;
+          font-weight: 700;
           border-radius: 9999px;
-          gap: 8px;
+          gap: 10px;
         }
         .nav-action-btn--primary {
           background-color: #1a56db;
@@ -529,7 +542,7 @@ export default function Navbar({ onOpenDownloadModal }) {
             padding: 6px 14px;
           }
           .nav-logo-img--hero-inline {
-            height: 44px;
+            height: 50px;
           }
           .nav-logo-img--scrolled,
           .nav-logo-img--menu {
@@ -540,8 +553,8 @@ export default function Navbar({ onOpenDownloadModal }) {
             font-size: 0.92rem;
           }
           .nav-action-btn--compact {
-            padding: 8px 14px;
-            font-size: 0.82rem;
+            padding: 8px 16px;
+            font-size: 0.88rem;
           }
         }
       `}</style>

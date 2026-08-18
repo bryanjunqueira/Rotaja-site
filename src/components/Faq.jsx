@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle, PhoneCall } from 'lucide-react';
 
-export default function Faq() {
+export default function Faq({ onOpenContact }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   const faqs = [
@@ -146,12 +146,12 @@ export default function Faq() {
           <span style={{ fontSize: '0.92rem', color: '#64748b' }}>
             Ainda tem dúvidas específicas sobre a sua operação?{' '}
           </span>
-          <a
-            href="#contato"
-            style={{ fontSize: '0.92rem', fontWeight: 700, color: '#1a56db', textDecoration: 'underline' }}
+          <button
+            onClick={onOpenContact}
+            style={{ fontSize: '0.92rem', fontWeight: 700, color: '#1a56db', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
           >
             Fale com nossa equipe comercial
-          </a>
+          </button>
         </div>
 
       </div>

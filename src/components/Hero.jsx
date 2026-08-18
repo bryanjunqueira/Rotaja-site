@@ -31,7 +31,7 @@ const slides = [
 
 function HeroTruckIcon() {
   return (
-    <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
+    <svg width="40" height="29" viewBox="0 0 28 20" fill="none" aria-hidden="true">
       <rect x="1" y="7" width="13" height="9" rx="1.5" fill="#1a56db" />
       <path d="M14 10h5l3 3v3h-8V10z" fill="#1a56db" />
       <rect x="3" y="9" width="5" height="3" rx="0.5" fill="#93c5fd" />
@@ -289,7 +289,7 @@ export default function Hero({ onOpenDownloadModal }) {
           gap: 0;
           max-width: 580px;
           margin: 0 auto;
-          padding-top: 36px;
+          padding-top: 44px;
         }
         .hero-slide-truck {
           position: absolute;
@@ -370,7 +370,7 @@ export default function Hero({ onOpenDownloadModal }) {
           }
           .hero-slide-nav {
             max-width: 100%;
-            padding-top: 30px;
+            padding-top: 38px;
           }
           .hero-slide-label {
             font-size: 0.88rem;
