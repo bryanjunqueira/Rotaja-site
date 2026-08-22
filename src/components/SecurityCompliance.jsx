@@ -50,74 +50,56 @@ export default function SecurityCompliance() {
 
   return (
     <section
-      style={{
-        padding: '100px 0',
-        backgroundColor: '#09121f',
-        color: '#ffffff',
-        borderBottom: '1px solid #1e293b',
-      }}
+      className="security-section"
     >
       <div className="corporate-container">
         
         {/* Header */}
-        <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 60px' }}>
+        <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 52px' }}>
           <h2
             style={{
               fontFamily: 'Plus Jakarta Sans, sans-serif',
-              fontSize: 'clamp(2rem, 3.2vw, 2.8rem)',
+              fontSize: 'clamp(1.75rem, 3.2vw, 2.8rem)',
               fontWeight: 800,
               color: '#ffffff',
-              marginBottom: '18px',
+              marginBottom: '16px',
             }}
           >
             Padrão corporativo de segurança para sua carga rodar protegida.
           </h2>
-          <p style={{ fontSize: '1.08rem', color: '#94a3b8', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '1.02rem', color: '#94a3b8', lineHeight: 1.7 }}>
             Processos homologados para garantir que sua operação logística nunca pare por falta de conformidade.
           </p>
         </div>
 
         {/* Security Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '20px',
-            marginBottom: '64px',
-          }}
-          className="security-grid"
-        >
+        <div className="security-grid">
           {securityPillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
               <div
                 key={idx}
-                style={{
-                  backgroundColor: '#0f1d30',
-                  borderRadius: '20px',
-                  border: '1px solid #1e3a5f',
-                  padding: '28px 24px',
-                }}
+                className="security-pillar-card"
               >
                 <div
                   style={{
-                    width: '48px',
-                    height: '48px',
+                    width: '44px',
+                    height: '44px',
                     borderRadius: '12px',
                     backgroundColor: 'rgba(26, 86, 219, 0.2)',
                     border: '1px solid rgba(26, 86, 219, 0.4)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginBottom: '18px',
+                    marginBottom: '16px',
                   }}
                 >
-                  <Icon size={24} color="#60a5fa" />
+                  <Icon size={22} color="#60a5fa" />
                 </div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff', marginBottom: '8px' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: '6px' }}>
                   {pillar.title}
                 </h3>
-                <p style={{ fontSize: '0.88rem', color: '#94a3b8', lineHeight: 1.6 }}>
+                <p style={{ fontSize: '0.86rem', color: '#94a3b8', lineHeight: 1.6 }}>
                   {pillar.desc}
                 </p>
               </div>
@@ -126,46 +108,27 @@ export default function SecurityCompliance() {
         </div>
 
         {/* Vehicles Supported Box */}
-        <div
-          style={{
-            backgroundColor: '#0f1d30',
-            borderRadius: '24px',
-            border: '1px solid #1e3a5f',
-            padding: '40px',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-            <Truck size={24} color="#60a5fa" />
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff' }}>
+        <div className="security-vehicles-box">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <Truck size={22} color="#60a5fa" />
+            <h3 style={{ fontSize: 'clamp(1.15rem, 2.2vw, 1.35rem)', fontWeight: 800, color: '#ffffff' }}>
               Modalidades e Categorias de Veículos Atendidas
             </h3>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '20px',
-            }}
-            className="vehicles-grid"
-          >
+          <div className="vehicles-grid">
             {vehicleCategories.map((cat, idx) => (
               <div
                 key={idx}
-                style={{
-                  backgroundColor: '#09121f',
-                  borderRadius: '16px',
-                  border: '1px solid #1e293b',
-                  padding: '20px',
-                }}
+                className="vehicle-cat-card"
               >
-                <div style={{ fontSize: '1rem', fontWeight: 800, color: '#60a5fa', marginBottom: '6px' }}>
+                <div style={{ fontSize: '0.96rem', fontWeight: 800, color: '#60a5fa', marginBottom: '4px' }}>
                   {cat.type}
                 </div>
-                <div style={{ fontSize: '0.84rem', color: '#e2e8f0', fontWeight: 600, marginBottom: '6px' }}>
+                <div style={{ fontSize: '0.82rem', color: '#e2e8f0', fontWeight: 600, marginBottom: '4px' }}>
                   {cat.models}
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#64748b' }}>
+                <div style={{ fontSize: '0.76rem', color: '#64748b' }}>
                   {cat.ideal}
                 </div>
               </div>
@@ -176,20 +139,74 @@ export default function SecurityCompliance() {
       </div>
 
       <style>{`
+        .security-section {
+          padding: 90px 0;
+          background-color: #09121f;
+          color: #ffffff;
+          border-bottom: 1px solid #1e293b;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        .security-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+          margin-bottom: 56px;
+        }
+        .security-pillar-card {
+          background-color: #0f1d30;
+          border-radius: 20px;
+          border: 1px solid #1e3a5f;
+          padding: 28px 24px;
+        }
+        .security-vehicles-box {
+          background-color: #0f1d30;
+          border-radius: 24px;
+          border: 1px solid #1e3a5f;
+          padding: 36px;
+        }
+        .vehicles-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+        }
+        .vehicle-cat-card {
+          background-color: #09121f;
+          border-radius: 16px;
+          border: 1px solid #1e293b;
+          padding: 18px;
+        }
+
         @media (max-width: 960px) {
           .security-grid {
-            grid-template-columns: 1fr 1fr !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
           }
           .vehicles-grid {
-            grid-template-columns: 1fr 1fr !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
           }
         }
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
+          .security-section {
+            padding: 60px 0;
+          }
           .security-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 36px;
+          }
+          .security-pillar-card {
+            padding: 20px 18px;
+            border-radius: 16px;
+          }
+          .security-vehicles-box {
+            padding: 22px 18px;
+            border-radius: 18px;
           }
           .vehicles-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
+            gap: 12px;
           }
         }
       `}</style>

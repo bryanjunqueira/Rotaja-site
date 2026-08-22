@@ -9,28 +9,14 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
 
   return (
     <footer
-      style={{
-        backgroundColor: '#09121f',
-        color: '#ffffff',
-        borderTop: '1px solid #1e293b',
-        paddingTop: '80px',
-        paddingBottom: '40px',
-      }}
+      className="site-footer"
     >
       <div className="corporate-container">
         
         {/* Main Footer Columns */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.8fr 1fr 1fr 1.2fr',
-            gap: '48px',
-            marginBottom: '60px',
-          }}
-          className="footer-grid"
-        >
+        <div className="footer-grid">
           {/* Brand Col */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div
                 style={{
@@ -43,24 +29,24 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
                 <img
                   src={logoNoBg}
                   alt="RotaJá"
-                  style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+                  style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
                 />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '1.3rem', fontWeight: 900, color: '#ffffff', lineHeight: 1 }}>
+                <span style={{ fontFamily: 'Plus Jakarta Sans', fontSize: '1.25rem', fontWeight: 900, color: '#ffffff', lineHeight: 1 }}>
                   Rota<span style={{ color: '#3b82f6' }}>Já</span>
                 </span>
-                <span style={{ fontSize: '0.65rem', color: '#94a3b8', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '2px' }}>
+                <span style={{ fontSize: '0.62rem', color: '#94a3b8', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '2px' }}>
                   Transporte & Fretes
                 </span>
               </div>
             </div>
 
-            <p style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: 1.7, maxWidth: '340px' }}>
+            <p style={{ fontSize: '0.88rem', color: '#94a3b8', lineHeight: 1.65, maxWidth: '340px' }}>
               Plataforma digital integrada de cotação, gestão e intermediação de fretes rodoviários e urbanos para motoristas autônomos e empresas embarcadoras.
             </p>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#60a5fa', fontSize: '0.82rem', fontWeight: 600 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#60a5fa', fontSize: '0.8rem', fontWeight: 600 }}>
               <ShieldCheck size={16} />
               <span>Homologação e Conformidade ANTT</span>
             </div>
@@ -68,32 +54,32 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
 
           {/* Col 2: Soluções */}
           <div>
-            <h4 style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '20px' }}>
+            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '16px' }}>
               Soluções
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
-                <a href="#solucoes" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a href="#solucoes" className="footer-link">
                   Para Embarcadores & Indústrias
                 </a>
               </li>
               <li>
-                <a href="#solucoes" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a href="#solucoes" className="footer-link">
                   Para Motoristas Autônomos
                 </a>
               </li>
               <li>
-                <a href="#solucoes" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a href="#solucoes" className="footer-link">
                   Gestão de Frotas & Transportadoras
                 </a>
               </li>
               <li>
-                <a href="#como-funciona" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a href="#como-funciona" className="footer-link">
                   Acompanhamento em Tempo Real
                 </a>
               </li>
               <li>
-                <a href="#diferenciais" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a href="#diferenciais" className="footer-link">
                   Canhoto Digital de Entrega
                 </a>
               </li>
@@ -102,30 +88,33 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
 
           {/* Col 3: Institucional */}
           <div>
-            <h4 style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '20px' }}>
+            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '16px' }}>
               Institucional
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
-                <a href="#aplicativo" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a href="#aplicativo" className="footer-link">
                   Telas do Aplicativo
                 </a>
               </li>
               <li>
-                <a href="#faq" style={{ fontSize: '0.9rem', color: '#94a3b8', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')} onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a href="#faq" className="footer-link">
                   Perguntas Frequentes (FAQ)
                 </a>
               </li>
               <li>
                 <button
-                onClick={onOpenContact}
-                style={{ background: 'none', color: '#94a3b8', fontSize: '0.9rem', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-              >
-                Fale com a Equipe
-              </button>
+                  onClick={onOpenContact}
+                  className="footer-btn-link"
+                >
+                  Fale com a Equipe
+                </button>
               </li>
               <li>
-                <button onClick={onOpenDownloadModal} style={{ background: 'none', color: '#94a3b8', fontSize: '0.9rem', textAlign: 'left', cursor: 'pointer' }}>
+                <button
+                  onClick={onOpenDownloadModal}
+                  className="footer-btn-link"
+                >
                   Acesso Piloto
                 </button>
               </li>
@@ -133,11 +122,11 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
           </div>
 
           {/* Col 4: Baixar App CTA */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <h4 style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Aplicativo Móvel
             </h4>
-            <p style={{ fontSize: '0.88rem', color: '#94a3b8', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '0.86rem', color: '#94a3b8', lineHeight: 1.6 }}>
               Disponível para motoristas parceiros e gestores de transporte. Acesse agora pelo celular.
             </p>
             <button
@@ -156,19 +145,9 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
         </div>
 
         {/* Bottom Bar */}
-        <div
-          style={{
-            borderTop: '1px solid #1e293b',
-            paddingTop: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '16px',
-          }}
-        >
-          <div style={{ fontSize: '0.82rem', color: '#64748b' }}>
-            © {new Date().getFullYear()} RotaJá Tecnologia em Transporte Ltda. Todos os direitos reservados. CNPJ: 00.000.000/0001-00
+        <div className="footer-bottom-bar">
+          <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
+            © {new Date().getFullYear()} RotaJá Tecnologia em Transporte Ltda. Todos os direitos reservados.
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
@@ -177,15 +156,13 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
               style={{
                 background: 'transparent',
                 color: '#94a3b8',
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 fontWeight: 600,
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
                 cursor: 'pointer',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
             >
               Voltar ao Topo
               <ArrowUp size={14} />
@@ -196,14 +173,73 @@ export default function Footer({ onOpenDownloadModal, onOpenContact }) {
       </div>
 
       <style>{`
+        .site-footer {
+          background-color: #09121f;
+          color: #ffffff;
+          border-top: 1px solid #1e293b;
+          padding-top: 80px;
+          padding-bottom: 40px;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 1.8fr 1fr 1fr 1.2fr;
+          gap: 48px;
+          margin-bottom: 56px;
+        }
+        .footer-link {
+          font-size: 0.88rem;
+          color: #94a3b8;
+          transition: color 0.2s ease;
+        }
+        .footer-link:hover {
+          color: #ffffff;
+        }
+        .footer-btn-link {
+          background: none;
+          border: none;
+          color: #94a3b8;
+          font-size: 0.88rem;
+          text-align: left;
+          cursor: pointer;
+          padding: 0;
+          transition: color 0.2s ease;
+        }
+        .footer-btn-link:hover {
+          color: #ffffff;
+        }
+        .footer-bottom-bar {
+          border-top: 1px solid #1e293b;
+          padding-top: 28px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 16px;
+        }
+
         @media (max-width: 960px) {
           .footer-grid {
-            grid-template-columns: 1fr 1fr !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
           }
         }
         @media (max-width: 600px) {
+          .site-footer {
+            padding-top: 52px;
+            padding-bottom: 32px;
+          }
           .footer-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
+            gap: 28px;
+            margin-bottom: 36px;
+          }
+          .footer-bottom-bar {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 14px;
           }
         }
       `}</style>

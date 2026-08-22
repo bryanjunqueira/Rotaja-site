@@ -34,39 +34,36 @@ export default function Faq({ onOpenContact }) {
   return (
     <section
       id="faq"
-      style={{
-        padding: '100px 0',
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid #e2e8f0',
-      }}
+      className="faq-section"
     >
       <div className="corporate-container" style={{ maxWidth: '880px' }}>
         
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
           <h2
             style={{
               fontFamily: 'Plus Jakarta Sans, sans-serif',
-              fontSize: 'clamp(2rem, 3.2vw, 2.8rem)',
+              fontSize: 'clamp(1.75rem, 3.2vw, 2.8rem)',
               fontWeight: 800,
               color: '#0f172a',
-              marginBottom: '18px',
+              marginBottom: '16px',
             }}
           >
             Tire suas dúvidas sobre a operação do RotaJá.
           </h2>
-          <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7 }}>
             Esclarecimentos detalhados sobre requisitos cadastrais, segurança financeira e prazos operacionais.
           </p>
         </div>
 
         {/* Accordion */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
               <div
                 key={idx}
+                className="faq-accordion-item"
                 style={{
                   backgroundColor: isOpen ? '#ffffff' : '#f8fafc',
                   border: isOpen ? '1.5px solid #1a56db' : '1px solid #e2e8f0',
@@ -78,26 +75,16 @@ export default function Faq({ onOpenContact }) {
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? -1 : idx)}
+                  className="faq-btn"
                   style={{
-                    width: '100%',
-                    padding: '22px 24px',
-                    textAlign: 'left',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '16px',
-                    backgroundColor: 'transparent',
-                    fontSize: '1.02rem',
-                    fontWeight: 700,
                     color: isOpen ? '#1a56db' : '#0f172a',
-                    cursor: 'pointer',
                   }}
                 >
                   <span>{faq.q}</span>
                   <div
                     style={{
-                      width: '32px',
-                      height: '32px',
+                      width: '30px',
+                      height: '30px',
                       borderRadius: '8px',
                       backgroundColor: isOpen ? '#eff6ff' : '#ffffff',
                       border: '1px solid #e2e8f0',
@@ -114,16 +101,7 @@ export default function Faq({ onOpenContact }) {
                 </button>
 
                 {isOpen && (
-                  <div
-                    style={{
-                      padding: '0 24px 24px',
-                      color: '#475569',
-                      fontSize: '0.94rem',
-                      lineHeight: 1.7,
-                      borderTop: '1px solid #eff6ff',
-                      paddingTop: '16px',
-                    }}
-                  >
+                  <div className="faq-answer">
                     {faq.a}
                   </div>
                 )}
@@ -133,28 +111,77 @@ export default function Faq({ onOpenContact }) {
         </div>
 
         {/* Extra contact box */}
-        <div
-          style={{
-            marginTop: '40px',
-            textAlign: 'center',
-            padding: '24px',
-            backgroundColor: '#f8fafc',
-            borderRadius: '16px',
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          <span style={{ fontSize: '0.92rem', color: '#64748b' }}>
+        <div className="faq-extra-contact">
+          <span style={{ fontSize: '0.9rem', color: '#64748b' }}>
             Ainda tem dúvidas específicas sobre a sua operação?{' '}
           </span>
           <button
             onClick={onOpenContact}
-            style={{ fontSize: '0.92rem', fontWeight: 700, color: '#1a56db', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            style={{ fontSize: '0.9rem', fontWeight: 700, color: '#1a56db', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
           >
             Fale com nossa equipe comercial
           </button>
         </div>
 
       </div>
+
+      <style>{`
+        .faq-section {
+          padding: 90px 0;
+          background-color: #ffffff;
+          border-bottom: 1px solid #e2e8f0;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        .faq-btn {
+          width: 100%;
+          padding: 20px 24px;
+          text-align: left;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          background-color: transparent;
+          font-size: 1rem;
+          font-weight: 700;
+          cursor: pointer;
+        }
+        .faq-answer {
+          padding: 0 24px 22px;
+          color: '#475569';
+          font-size: 0.92rem;
+          line-height: 1.7;
+          border-top: 1px solid #eff6ff;
+          padding-top: 14px;
+        }
+        .faq-extra-contact {
+          margin-top: 36px;
+          text-align: center;
+          padding: 20px;
+          background-color: #f8fafc;
+          border-radius: 16px;
+          border: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 640px) {
+          .faq-section {
+            padding: 60px 0;
+          }
+          .faq-btn {
+            padding: 16px 18px;
+            font-size: 0.92rem;
+            gap: 12px;
+          }
+          .faq-answer {
+            padding: 0 18px 18px;
+            font-size: 0.88rem;
+            padding-top: 12px;
+          }
+          .faq-extra-contact {
+            padding: 16px;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -109,11 +109,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
     <section
       id="aplicativo"
       ref={sectionRef}
-      style={{
-        padding: '100px 0',
-        backgroundColor: '#f0f7ff',
-        borderBottom: '1px solid #e2e8f0',
-      }}
+      className="app-screenshots-section"
     >
       <div className="corporate-container">
         {/* Section Header */}
@@ -122,13 +118,13 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
           style={{
             textAlign: 'center',
             maxWidth: '740px',
-            margin: '0 auto 80px',
+            margin: '0 auto 64px',
           }}
         >
           <h2
             style={{
               fontFamily: 'Plus Jakarta Sans, sans-serif',
-              fontSize: 'clamp(2.1rem, 3.4vw, 2.9rem)',
+              fontSize: 'clamp(1.8rem, 3.4vw, 2.9rem)',
               fontWeight: 800,
               color: '#0f172a',
               marginBottom: '16px',
@@ -137,13 +133,13 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
           >
             Interface intuitiva, pensada para o dia a dia na estrada.
           </h2>
-          <p style={{ fontSize: '1.08rem', color: '#475569', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7 }}>
             Veja as telas reais do <strong>RotaJá</strong> em funcionamento: simples de usar, sem termos complicados e com todas as informações na palma da mão.
           </p>
         </div>
 
         {/* 4 Real App Screens with Smartphone Chassis */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '96px' }}>
+        <div className="app-screens-list">
           {screens.map((screen, idx) => {
             const Icon = screen.icon;
             const isReversed = idx % 2 === 1;
@@ -151,37 +147,12 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
             return (
               <div
                 key={screen.id}
-                className="scroll-reveal"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '64px',
-                  alignItems: 'center',
-                  direction: isReversed ? 'rtl' : 'ltr',
-                }}
+                className={`scroll-reveal app-screenshot-row ${isReversed ? 'app-screenshot-row--reversed' : ''}`}
                 data-direction={isReversed ? 'right' : 'left'}
               >
                 {/* Smartphone Device Frame displaying REAL Screenshot */}
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    direction: 'ltr',
-                  }}
-                  className="app-phone-arrive"
-                >
+                <div className="app-phone-arrive app-phone-col">
                   <div
-                    style={{
-                      position: 'relative',
-                      width: '290px',
-                      borderRadius: '42px',
-                      backgroundColor: '#0f172a',
-                      padding: '10px',
-                      boxShadow: '0 24px 50px -12px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(15, 23, 42, 0.08)',
-                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                      cursor: 'zoom-in',
-                    }}
                     className="app-phone-card"
                     onClick={() => setSelectedImage(screen)}
                     role="button"
@@ -195,94 +166,45 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
                     }}
                   >
                     {/* Zoom hint */}
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '18px',
-                        right: '18px',
-                        width: '34px',
-                        height: '34px',
-                        borderRadius: '50%',
-                        backgroundColor: 'rgba(15, 23, 42, 0.72)',
-                        backdropFilter: 'blur(4px)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: 12,
-                        color: '#ffffff',
-                        transition: 'all 0.2s ease',
-                      }}
-                      className="app-phone-zoom-hint"
-                    >
+                    <div className="app-phone-zoom-hint">
                       <ZoomIn size={16} />
                     </div>
+
                     {/* Notch / Dynamic Island */}
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '16px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '74px',
-                        height: '18px',
-                        backgroundColor: '#0f172a',
-                        borderRadius: '12px',
-                        zIndex: 10,
-                      }}
-                    />
+                    <div className="app-phone-notch" />
 
                     {/* Screen Container */}
-                    <div
-                      style={{
-                        width: '100%',
-                        borderRadius: '34px',
-                        overflow: 'hidden',
-                        backgroundColor: '#f1f5f9',
-                      }}
-                    >
+                    <div className="app-phone-screen-wrap">
                       <img
                         src={screen.image}
                         alt={screen.title}
-                        style={{
-                          width: '100%',
-                          height: '560px',
-                          objectFit: 'cover',
-                          objectPosition: 'top',
-                          display: 'block',
-                        }}
+                        className="app-phone-img"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Explanation Content */}
-                <div
-                  className="app-phone-copy"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '20px',
-                    direction: 'ltr',
-                  }}
-                >
+                <div className="app-phone-copy">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div
                       style={{
-                        width: '44px',
-                        height: '44px',
+                        width: '42px',
+                        height: '42px',
                         borderRadius: '12px',
                         backgroundColor: '#eff6ff',
                         border: '1.5px solid #bfdbfe',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        flexShrink: 0,
                       }}
                     >
-                      <Icon size={22} color="#1a56db" />
+                      <Icon size={20} color="#1a56db" />
                     </div>
                     <span
                       style={{
-                        fontSize: '0.8rem',
+                        fontSize: '0.78rem',
                         fontWeight: 700,
                         color: '#1a56db',
                         textTransform: 'uppercase',
@@ -296,7 +218,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
                   <h3
                     style={{
                       fontFamily: 'Plus Jakarta Sans, sans-serif',
-                      fontSize: 'clamp(1.6rem, 2.4vw, 2.1rem)',
+                      fontSize: 'clamp(1.35rem, 2.4vw, 2.1rem)',
                       fontWeight: 800,
                       color: '#0f172a',
                       lineHeight: 1.2,
@@ -305,7 +227,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
                     {screen.title}
                   </h3>
 
-                  <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7 }}>
+                  <p style={{ fontSize: '0.98rem', color: '#475569', lineHeight: 1.65 }}>
                     {screen.desc}
                   </p>
 
@@ -313,38 +235,17 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
                     {screen.highlights.map((item, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                         <CheckCircle size={18} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
-                        <span style={{ fontSize: '0.94rem', fontWeight: 600, color: '#1e293b' }}>
+                        <span style={{ fontSize: '0.92rem', fontWeight: 600, color: '#1e293b' }}>
                           {item}
                         </span>
                       </div>
                     ))}
                   </div>
 
-                  <div style={{ paddingTop: '8px' }}>
+                  <div style={{ paddingTop: '6px' }}>
                     <button
                       onClick={onOpenDownloadModal}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '12px 24px',
-                        backgroundColor: '#eff6ff',
-                        color: '#1a56db',
-                        border: '1.5px solid #bfdbfe',
-                        borderRadius: '12px',
-                        fontWeight: 700,
-                        fontSize: '0.92rem',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#1a56db';
-                        e.currentTarget.style.color = '#ffffff';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = '#eff6ff';
-                        e.currentTarget.style.color = '#1a56db';
-                      }}
+                      className="app-phone-btn"
                     >
                       <span>Testar no Aplicativo</span>
                       <ArrowRight size={16} />
@@ -357,26 +258,12 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
         </div>
 
         {/* Bottom Banner */}
-        <div
-          className="scroll-reveal"
-          style={{
-            marginTop: '80px',
-            padding: '36px 40px',
-            backgroundColor: '#0f172a',
-            borderRadius: '24px',
-            color: '#ffffff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '24px',
-            flexWrap: 'wrap',
-          }}
-        >
+        <div className="scroll-reveal app-bottom-banner">
           <div>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '6px' }}>
+            <h3 style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.45rem)', fontWeight: 800, color: '#ffffff', marginBottom: '6px' }}>
               Pronto para começar a rodar ou publicar suas cargas?
             </h3>
-            <p style={{ fontSize: '0.92rem', color: '#94a3b8' }}>
+            <p style={{ fontSize: '0.9rem', color: '#94a3b8' }}>
               Disponível para celulares Android e iOS com cadastro instantâneo.
             </p>
           </div>
@@ -410,7 +297,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
             onClick={() => setSelectedImage(null)}
             aria-label="Fechar imagem ampliada"
           >
-            <X size={26} />
+            <X size={24} />
           </button>
 
           <figure className="app-lightbox-figure" onClick={(e) => e.stopPropagation()}>
@@ -425,46 +312,155 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
       )}
 
       <style>{`
+        .app-screenshots-section {
+          padding: 90px 0;
+          background-color: #f0f7ff;
+          border-bottom: 1px solid #e2e8f0;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        .app-screens-list {
+          display: flex;
+          flex-direction: column;
+          gap: 84px;
+        }
+        .app-screenshot-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 56px;
+          align-items: center;
+        }
+        .app-screenshot-row--reversed {
+          direction: rtl;
+        }
+        .app-screenshot-row--reversed .app-phone-copy {
+          direction: ltr;
+        }
+        .app-screenshot-row--reversed .app-phone-col {
+          direction: ltr;
+        }
+        .app-phone-col {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .app-phone-card {
+          position: relative;
+          width: 290px;
+          max-width: 100%;
+          border-radius: 40px;
+          background-color: #0f172a;
+          padding: 9px;
+          box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(15, 23, 42, 0.08);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          cursor: zoom-in;
+        }
         .app-phone-card:hover {
-          transform: translateY(-6px);
+          transform: translateY(-5px);
           box-shadow: 0 30px 60px -12px rgba(26, 86, 219, 0.25) !important;
         }
-        .app-phone-arrive {
-          opacity: 0;
-          will-change: transform;
-        }
-        [data-direction="left"] .app-phone-arrive {
-          transform: translateX(-130vw);
-          transition: opacity 0.5s ease 0.15s, transform 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-        }
-        [data-direction="right"] .app-phone-arrive {
-          transform: translateX(130vw);
-          transition: opacity 0.5s ease 0.15s, transform 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-        }
-        .scroll-reveal.scroll-visible .app-phone-arrive {
-          opacity: 1;
-          transform: translateX(0);
-        }
-        .app-phone-copy {
-          opacity: 0;
-          transform: translateY(36px);
-          transition: opacity 0.7s ease 0.3s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
-        }
-        .scroll-reveal.scroll-visible .app-phone-copy {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .app-phone-arrive, .app-phone-copy {
-            transition: none !important;
-            transform: none !important;
-            opacity: 1 !important;
-          }
+        .app-phone-zoom-hint {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background-color: rgba(15, 23, 42, 0.72);
+          backdrop-filter: blur(4px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 12;
+          color: #ffffff;
+          transition: all 0.2s ease;
         }
         .app-phone-card:hover .app-phone-zoom-hint {
           background-color: rgba(26, 86, 219, 0.95);
           transform: scale(1.08);
         }
+        .app-phone-notch {
+          position: absolute;
+          top: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 70px;
+          height: 16px;
+          background-color: #0f172a;
+          border-radius: 12px;
+          z-index: 10;
+        }
+        .app-phone-screen-wrap {
+          width: 100%;
+          border-radius: 32px;
+          overflow: hidden;
+          background-color: #f1f5f9;
+        }
+        .app-phone-img {
+          width: 100%;
+          height: 520px;
+          object-fit: cover;
+          object-position: top;
+          display: block;
+        }
+        .app-phone-copy {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          direction: ltr;
+        }
+        .app-phone-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 24px;
+          background-color: #eff6ff;
+          color: #1a56db;
+          border: 1.5px solid #bfdbfe;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.92rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .app-phone-btn:hover {
+          background-color: #1a56db;
+          color: #ffffff;
+        }
+        .app-bottom-banner {
+          margin-top: 72px;
+          padding: 36px 40px;
+          background-color: #0f172a;
+          border-radius: 24px;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
+          flex-wrap: wrap;
+        }
+
+        /* Safe bounded animations */
+        .app-phone-arrive {
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+        .scroll-reveal.scroll-visible .app-phone-arrive {
+          opacity: 1;
+          transform: translateY(0) translateX(0);
+        }
+        .app-phone-copy {
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 0.6s ease 0.2s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+        .scroll-reveal.scroll-visible .app-phone-copy {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* Lightbox */
         .app-lightbox {
           position: fixed;
           inset: 0;
@@ -472,7 +468,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 24px;
+          padding: 16px;
           animation: lightboxFade 0.25s ease;
         }
         .app-lightbox-backdrop {
@@ -480,17 +476,16 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
           inset: 0;
           background-color: rgba(9, 18, 31, 0.92);
           backdrop-filter: blur(8px);
-          animation: backdropFade 0.3s ease;
         }
         .app-lightbox-close {
           position: absolute;
-          top: 22px;
-          right: 22px;
-          width: 48px;
-          height: 48px;
+          top: 18px;
+          right: 18px;
+          width: 42px;
+          height: 42px;
           border-radius: 50%;
           border: none;
-          background-color: rgba(255, 255, 255, 0.12);
+          background-color: rgba(255, 255, 255, 0.15);
           color: #ffffff;
           display: flex;
           align-items: center;
@@ -500,7 +495,7 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
           transition: all 0.2s ease;
         }
         .app-lightbox-close:hover {
-          background-color: rgba(255, 255, 255, 0.25);
+          background-color: rgba(255, 255, 255, 0.3);
           transform: rotate(90deg);
         }
         .app-lightbox-figure {
@@ -510,70 +505,94 @@ export default function AppScreenshots({ onOpenDownloadModal }) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 22px;
-          max-width: min(560px, 92vw);
-          animation: lightboxZoom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          gap: 16px;
+          max-width: min(520px, 94vw);
+          animation: lightboxZoom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .app-lightbox-screen {
           width: 100%;
-          max-height: 74vh;
-          border-radius: 36px;
+          max-height: 76vh;
+          border-radius: 28px;
           overflow: hidden;
           box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14), 0 30px 70px rgba(0, 0, 0, 0.55);
           background-color: #0f172a;
-          animation: lightboxShake 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .app-lightbox-screen img {
           width: 100%;
           height: auto;
-          max-height: 74vh;
+          max-height: 76vh;
           object-fit: contain;
           display: block;
         }
-        .app-lightbox-figure figcaption {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 8px;
-          text-align: center;
-        }
-        .app-lightbox-tag {
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          color: #93c5fd;
-          background-color: rgba(26, 86, 219, 0.25);
-          padding: 5px 14px;
-          border-radius: 9999px;
-        }
         .app-lightbox-title {
           font-family: 'Plus Jakarta Sans', Inter, sans-serif;
-          font-size: clamp(1rem, 2vw, 1.25rem);
+          font-size: clamp(0.95rem, 2vw, 1.2rem);
           font-weight: 700;
           color: #ffffff;
-          max-width: 480px;
+          text-align: center;
         }
+
         @keyframes lightboxFade {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        @keyframes backdropFade {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
         @keyframes lightboxZoom {
-          from { opacity: 0; transform: scale(0.86) translateY(16px); }
+          from { opacity: 0; transform: scale(0.9) translateY(12px); }
           to { opacity: 1; transform: scale(1) translateY(0); }
         }
-        @keyframes lightboxShake {
-          0% { transform: scale(0.8); }
-          60% { transform: scale(1.05); }
-          100% { transform: scale(1); }
+
+        @media (max-width: 900px) {
+          .app-screenshot-row {
+            grid-template-columns: 1fr;
+            direction: ltr !important;
+            gap: 36px;
+          }
+          .app-screenshot-row--reversed {
+            direction: ltr !important;
+          }
+          .app-phone-card {
+            width: 270px;
+          }
+          .app-phone-img {
+            height: 480px;
+          }
+          .app-screens-list {
+            gap: 60px;
+          }
+          .app-bottom-banner {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 20px;
+            padding: 28px 24px;
+            margin-top: 56px;
+          }
+          .app-bottom-banner button {
+            width: 100%;
+          }
         }
-        @media (prefers-reduced-motion: reduce) {
-          .app-lightbox-figure, .app-lightbox-screen, .app-lightbox, .app-lightbox-backdrop {
-            animation: none !important;
+
+        @media (max-width: 640px) {
+          .app-screenshots-section {
+            padding: 60px 0;
+          }
+          .app-phone-card {
+            width: 250px;
+            border-radius: 34px;
+            padding: 8px;
+          }
+          .app-phone-screen-wrap {
+            border-radius: 28px;
+          }
+          .app-phone-img {
+            height: 420px;
+          }
+          .app-phone-btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .app-bottom-banner {
+            padding: 24px 18px;
+            border-radius: 18px;
           }
         }
       `}</style>

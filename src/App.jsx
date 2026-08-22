@@ -62,33 +62,15 @@ export default function App() {
       <Navbar onOpenDownloadModal={openDownload} onOpenContact={openContact} onGoHome={goHome} />
 
       {/* Fixed Hero — stays completely static while user scrolls */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100vh',
-          zIndex: 1,
-        }}
-      >
+      <div className="hero-fixed-container">
         <Hero onOpenDownloadModal={openDownload} />
       </div>
 
-      {/* 100vh Spacer for the scroll journey */}
-      <div style={{ height: '100vh', pointerEvents: 'none' }} />
+      {/* Spacer for the scroll journey */}
+      <div className="hero-scroll-spacer" />
 
       {/* Main Content — slides up and covers the Hero like a physical curtain */}
-      <main
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          backgroundColor: '#ffffff',
-          borderTopLeftRadius: '36px',
-          borderTopRightRadius: '36px',
-          boxShadow: '0 -25px 60px rgba(15, 23, 42, 0.15)',
-        }}
-      >
+      <main className="main-curtain">
         {/* Value Proposition */}
         <ValueProposition onOpenDownloadModal={openDownload} onOpenContact={openContact} />
 

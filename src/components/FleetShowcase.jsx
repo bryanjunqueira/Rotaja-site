@@ -11,89 +11,42 @@ export default function FleetShowcase({ onOpenDownloadModal }) {
 
   return (
     <section
-      style={{
-        padding: '100px 0',
-        backgroundColor: '#f0f7ff',
-        borderBottom: '1px solid #e2e8f0',
-      }}
+      className="fleet-section"
     >
       <div className="corporate-container">
         
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.05fr 0.95fr',
-            gap: '56px',
-            alignItems: 'center',
-          }}
-          className="fleet-grid"
-        >
+        <div className="fleet-grid">
           {/* Left: Real Photo of Blue Heavy Trucks and Trailers */}
-          <div
-            style={{
-              position: 'relative',
-              borderRadius: '28px',
-              overflow: 'hidden',
-              boxShadow: '0 24px 60px -12px rgba(15, 23, 42, 0.2)',
-              border: '4px solid #ffffff',
-            }}
-          >
+          <div className="fleet-photo-wrapper">
             <img
               src={trucksPhoto}
               alt="Frota de caminhões e carretas parceiras RotaJá"
-              style={{
-                width: '100%',
-                height: '460px',
-                objectFit: 'cover',
-                display: 'block',
-              }}
+              className="fleet-photo-img"
             />
 
             {/* Overlay Gradient & Badge */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: '24px',
-                background: 'linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.85) 100%)',
-                color: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
+            <div className="fleet-photo-overlay">
               <div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff' }}>
+                <div style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: 800, color: '#ffffff' }}>
                   Frota Diversificada em Todo o Brasil
                 </div>
-                <div style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>
                   De utilitários leves a bitrens pesados
                 </div>
               </div>
 
-              <div
-                style={{
-                  backgroundColor: 'rgba(26, 86, 219, 0.9)',
-                  padding: '6px 14px',
-                  borderRadius: '9999px',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  backdropFilter: 'blur(8px)',
-                }}
-              >
+              <div className="fleet-badge">
                 +50.000 Veículos
               </div>
             </div>
           </div>
 
           {/* Right: Fleet Description & Vehicle Types */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <h2
               style={{
                 fontFamily: 'Plus Jakarta Sans, sans-serif',
-                fontSize: 'clamp(2rem, 3.2vw, 2.7rem)',
+                fontSize: 'clamp(1.75rem, 3.2vw, 2.7rem)',
                 fontWeight: 800,
                 color: '#0f172a',
                 lineHeight: 1.18,
@@ -102,23 +55,15 @@ export default function FleetShowcase({ onOpenDownloadModal }) {
               O veículo certo para cada tipo e peso de carga.
             </h2>
 
-            <p style={{ fontSize: '1.04rem', color: '#475569', lineHeight: 1.7 }}>
+            <p style={{ fontSize: '1rem', color: '#475569', lineHeight: 1.7 }}>
               Com a <strong>RotaJá</strong>, você não precisa ficar ligando para diversas transportadoras. Nossa plataforma aloca instantaneamente o caminhão ideal compatível com o peso, cubagem e exigência da sua carga.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingTop: '6px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingTop: '4px' }}>
               {vehicleTypes.map((v, idx) => (
                 <div
                   key={idx}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '16px',
-                    padding: '16px 20px',
-                    backgroundColor: '#f8fafc',
-                    borderRadius: '16px',
-                    border: '1px solid #e2e8f0',
-                  }}
+                  className="fleet-type-item"
                 >
                   <div
                     style={{
@@ -135,10 +80,10 @@ export default function FleetShowcase({ onOpenDownloadModal }) {
                     <Truck size={20} color="#1a56db" />
                   </div>
                   <div>
-                    <div style={{ fontSize: '0.98rem', fontWeight: 800, color: '#0f172a' }}>
+                    <div style={{ fontSize: '0.96rem', fontWeight: 800, color: '#0f172a' }}>
                       {v.title}
                     </div>
-                    <div style={{ fontSize: '0.84rem', color: '#64748b', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.82rem', color: '#64748b', marginTop: '2px' }}>
                       {v.desc}
                     </div>
                   </div>
@@ -146,10 +91,10 @@ export default function FleetShowcase({ onOpenDownloadModal }) {
               ))}
             </div>
 
-            <div style={{ paddingTop: '8px' }}>
+            <div style={{ paddingTop: '6px' }}>
               <button
                 onClick={onOpenDownloadModal}
-                className="btn-primary"
+                className="btn-primary fleet-cta-btn"
                 style={{ padding: '14px 28px', borderRadius: '12px' }}
               >
                 <span>Solicitar Cotação de Carga</span>
@@ -163,10 +108,100 @@ export default function FleetShowcase({ onOpenDownloadModal }) {
       </div>
 
       <style>{`
+        .fleet-section {
+          padding: 90px 0;
+          background-color: #f0f7ff;
+          border-bottom: 1px solid #e2e8f0;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        .fleet-grid {
+          display: grid;
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 56px;
+          align-items: center;
+        }
+        .fleet-photo-wrapper {
+          position: relative;
+          border-radius: 28px;
+          overflow: hidden;
+          box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.2);
+          border: 4px solid #ffffff;
+          background-color: #e2e8f0;
+        }
+        .fleet-photo-img {
+          width: 100%;
+          height: 460px;
+          object-fit: cover;
+          display: block;
+        }
+        .fleet-photo-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 24px;
+          background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.88) 100%);
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+        .fleet-badge {
+          background-color: rgba(26, 86, 219, 0.9);
+          padding: 6px 14px;
+          border-radius: 9999px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          backdrop-filter: blur(8px);
+          white-space: nowrap;
+        }
+        .fleet-type-item {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 16px 20px;
+          background-color: #ffffff;
+          border-radius: 16px;
+          border: 1px solid #e2e8f0;
+          transition: border-color 0.2s ease;
+        }
+        .fleet-type-item:hover {
+          border-color: #1a56db;
+        }
+
         @media (max-width: 960px) {
           .fleet-grid {
-            grid-template-columns: 1fr !important;
-            gap: 40px !important;
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .fleet-photo-img {
+            height: 340px;
+          }
+        }
+        @media (max-width: 640px) {
+          .fleet-section {
+            padding: 60px 0;
+          }
+          .fleet-photo-wrapper {
+            border-radius: 20px;
+          }
+          .fleet-photo-img {
+            height: 260px;
+          }
+          .fleet-photo-overlay {
+            padding: 16px;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .fleet-type-item {
+            padding: 14px 16px;
+            gap: 12px;
+          }
+          .fleet-cta-btn {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>

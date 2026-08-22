@@ -27,20 +27,16 @@ export default function HowItWorks({ onOpenDownloadModal }) {
   return (
     <section
       id="como-funciona"
-      style={{
-        padding: '100px 0',
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid #e2e8f0',
-      }}
+      className="how-it-works-section"
     >
       <div className="corporate-container">
         
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 64px' }}>
+        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 52px' }}>
           <h2
             style={{
               fontFamily: 'Plus Jakarta Sans, sans-serif',
-              fontSize: 'clamp(2.1rem, 3.4vw, 2.9rem)',
+              fontSize: 'clamp(1.75rem, 3.4vw, 2.9rem)',
               fontWeight: 800,
               color: '#0f172a',
               marginBottom: '16px',
@@ -49,46 +45,27 @@ export default function HowItWorks({ onOpenDownloadModal }) {
           >
             Como funciona a operação no RotaJá
           </h2>
-          <p style={{ fontSize: '1.08rem', color: '#475569', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '1.02rem', color: '#475569', lineHeight: 1.7 }}>
             Fluxo simplificado do carregamento até a entrega final, sem papelada e sem complicação.
           </p>
         </div>
 
         {/* 2-Column Clean Layout: 3 Simple Steps on Left + Real Driver Photo on Right */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.1fr 0.9fr',
-            gap: '56px',
-            alignItems: 'center',
-          }}
-          className="how-it-works-grid"
-        >
+        <div className="how-it-works-grid">
           {/* Left Column: 3 Linear Steps */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
             {steps.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '20px',
-                    padding: '24px 28px',
-                    backgroundColor: '#ffffff',
-                    borderRadius: '20px',
-                    border: '1.5px solid #e2e8f0',
-                    boxShadow: '0 4px 16px -2px rgba(15, 23, 42, 0.04)',
-                    transition: 'all 0.25s ease',
-                  }}
                   className="step-card"
                 >
                   <div
                     style={{
-                      width: '48px',
-                      height: '48px',
-                      borderRadius: '14px',
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
                       backgroundColor: '#eff6ff',
                       border: '1.5px solid #bfdbfe',
                       display: 'flex',
@@ -97,21 +74,21 @@ export default function HowItWorks({ onOpenDownloadModal }) {
                       flexShrink: 0,
                     }}
                   >
-                    <Icon size={24} color="#1a56db" />
+                    <Icon size={22} color="#1a56db" />
                   </div>
 
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                      <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#1a56db', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#1a56db', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                         Passo {item.step}
                       </span>
                     </div>
 
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
+                    <h3 style={{ fontSize: '1.12rem', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>
                       {item.title}
                     </h3>
 
-                    <p style={{ fontSize: '0.94rem', color: '#475569', lineHeight: 1.6 }}>
+                    <p style={{ fontSize: '0.92rem', color: '#475569', lineHeight: 1.6 }}>
                       {item.desc}
                     </p>
                   </div>
@@ -119,10 +96,10 @@ export default function HowItWorks({ onOpenDownloadModal }) {
               );
             })}
 
-            <div style={{ paddingTop: '8px' }}>
+            <div style={{ paddingTop: '6px' }}>
               <button
                 onClick={onOpenDownloadModal}
-                className="btn-primary"
+                className="btn-primary how-cta-btn"
                 style={{ borderRadius: '12px', padding: '14px 28px' }}
               >
                 <span>Cadastre-se Gratuitamente</span>
@@ -140,64 +117,35 @@ export default function HowItWorks({ onOpenDownloadModal }) {
               alignItems: 'center',
             }}
           >
-            <div
-              style={{
-                borderRadius: '28px',
-                overflow: 'hidden',
-                boxShadow: '0 20px 50px -10px rgba(15, 23, 42, 0.18)',
-                width: '100%',
-                maxWidth: '480px',
-                border: '4px solid #ffffff',
-                backgroundColor: '#e2e8f0',
-              }}
-            >
+            <div className="how-photo-card">
               <img
                 src={driverPhoto}
                 alt="Motorista parceiro RotaJá realizando entrega"
-                style={{
-                  width: '100%',
-                  height: '460px',
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
+                className="how-photo-img"
               />
             </div>
 
             {/* Floating Live Badge */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '-16px',
-                right: '10px',
-                backgroundColor: '#ffffff',
-                borderRadius: '16px',
-                padding: '14px 20px',
-                boxShadow: '0 10px 30px -4px rgba(15, 23, 42, 0.15)',
-                border: '1.5px solid #e2e8f0',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-              }}
-              className="how-float-badge"
-            >
+            <div className="how-float-badge">
               <div
                 style={{
-                  width: '38px',
-                  height: '38px',
+                  width: '36px',
+                  height: '36px',
                   borderRadius: '10px',
                   backgroundColor: '#ecfdf5',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  flexShrink: 0,
                 }}
               >
-                <ShieldCheck size={22} color="#10b981" />
+                <ShieldCheck size={20} color="#10b981" />
               </div>
               <div>
-                <div style={{ fontSize: '0.94rem', fontWeight: 800, color: '#0f172a' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0f172a', whiteSpace: 'nowrap' }}>
                   100% Digital & Seguro
                 </div>
-                <div style={{ fontSize: '0.74rem', color: '#64748b' }}>
+                <div style={{ fontSize: '0.72rem', color: '#64748b', whiteSpace: 'nowrap' }}>
                   Sem burocracia ou intermediários
                 </div>
               </div>
@@ -209,19 +157,100 @@ export default function HowItWorks({ onOpenDownloadModal }) {
       </div>
 
       <style>{`
+        .how-it-works-section {
+          padding: 90px 0;
+          background-color: #ffffff;
+          border-bottom: 1px solid #e2e8f0;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        .how-it-works-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 56px;
+          align-items: center;
+        }
+        .step-card {
+          display: flex;
+          align-items: flex-start;
+          gap: 20px;
+          padding: 22px 24px;
+          background-color: #ffffff;
+          border-radius: 20px;
+          border: 1.5px solid #e2e8f0;
+          box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+          transition: all 0.25s ease;
+        }
         .step-card:hover {
           border-color: #1a56db !important;
           transform: translateY(-3px);
           box-shadow: 0 10px 28px -4px rgba(26, 86, 219, 0.12) !important;
         }
+        .how-photo-card {
+          border-radius: 28px;
+          overflow: hidden;
+          box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.18);
+          width: 100%;
+          max-width: 480px;
+          border: 4px solid #ffffff;
+          background-color: #e2e8f0;
+        }
+        .how-photo-img {
+          width: 100%;
+          height: 440px;
+          object-fit: cover;
+          display: block;
+        }
+        .how-float-badge {
+          position: absolute;
+          bottom: -16px;
+          right: 16px;
+          background-color: #ffffff;
+          border-radius: 16px;
+          padding: 12px 18px;
+          box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.15);
+          border: 1.5px solid #e2e8f0;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
         @media (max-width: 960px) {
           .how-it-works-grid {
-            grid-template-columns: 1fr !important;
-            gap: 40px !important;
+            grid-template-columns: 1fr;
+            gap: 44px;
           }
           .how-float-badge {
-            right: 50% !important;
+            right: 50%;
             transform: translateX(50%);
+            bottom: -12px;
+          }
+          .how-photo-img {
+            height: 340px;
+          }
+        }
+        @media (max-width: 640px) {
+          .how-it-works-section {
+            padding: 60px 0;
+          }
+          .step-card {
+            padding: 16px;
+            gap: 14px;
+            border-radius: 16px;
+          }
+          .how-cta-btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .how-photo-img {
+            height: 260px;
+          }
+          .how-photo-card {
+            border-radius: 20px;
+          }
+          .how-float-badge {
+            padding: 10px 14px;
+            border-radius: 12px;
           }
         }
       `}</style>

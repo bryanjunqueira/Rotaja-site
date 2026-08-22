@@ -1,266 +1,150 @@
-import React, { useState } from 'react';
-import { X, Smartphone, CheckCircle, Mail, ShieldCheck, ArrowRight, Truck, Building2 } from 'lucide-react';
-import logoNoBg from '../assets/WhatsApp_Image_2026-08-10_at_20.09.11-removebg-preview.png';
+import React from 'react';
+import { X, Info } from 'lucide-react';
 
 export default function DownloadModal({ isOpen, onClose }) {
-  const [email, setEmail] = useState('');
-  const [perfil, setPerfil] = useState('motorista');
-  const [subscribed, setSubscribed] = useState(false);
-
   if (!isOpen) return null;
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-    }
-  };
-
-  const handleClose = () => {
-    setSubscribed(false);
-    setEmail('');
-    onClose();
-  };
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 2000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '16px',
-        backgroundColor: 'rgba(15, 23, 42, 0.75)',
-        backdropFilter: 'blur(8px)',
-      }}
-      onClick={handleClose}
+      className="balloon-modal-backdrop"
+      onClick={onClose}
     >
       <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: '520px',
-          backgroundColor: '#ffffff',
-          borderRadius: '24px',
-          padding: '36px 32px',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-          border: '1px solid #e2e8f0',
-        }}
+        className="balloon-modal-box"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button
-          onClick={handleClose}
-          style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            padding: '8px',
-            borderRadius: '50%',
-            backgroundColor: '#f1f5f9',
-            border: 'none',
-            color: '#64748b',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          aria-label="Fechar"
+          onClick={onClose}
+          className="balloon-modal-close"
+          aria-label="Fechar aviso"
         >
           <X size={18} />
         </button>
 
-        {subscribed ? (
-          <div style={{ textAlign: 'center', padding: '24px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-            <div
-              style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '50%',
-                backgroundColor: '#ecfdf5',
-                border: '2px solid #10b981',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <CheckCircle size={32} color="#10b981" />
-            </div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a' }}>
-              Acesso Confirmado com Sucesso!
-            </h3>
-            <p style={{ fontSize: '0.92rem', color: '#475569', lineHeight: 1.6, maxWidth: '380px' }}>
-              Enviamos o link direto de download e instruções para o e-mail <strong>{email}</strong>.
-            </p>
-            <button
-              onClick={handleClose}
-              className="btn-primary"
-              style={{ marginTop: '8px', borderRadius: '10px' }}
-            >
-              Concluir
-            </button>
-          </div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <img src={logoNoBg} alt="RotaJá" style={{ height: '36px', width: 'auto' }} />
-              <span className="corporate-badge" style={{ fontSize: '0.72rem' }}>
-                Versão Oficial RotaJá
-              </span>
-            </div>
+        <div className="balloon-modal-icon">
+          <Info size={24} color="#1a56db" />
+        </div>
 
-            <div>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
-                Baixe o Aplicativo RotaJá
-              </h3>
-              <p style={{ fontSize: '0.9rem', color: '#64748b' }}>
-                Disponível para Android e iOS. Acesse a melhor rede de cargas e transportadores.
-              </p>
-            </div>
+        <h3 className="balloon-modal-title">
+          Aplicativo em período de testes
+        </h3>
 
-            {/* Store Badges */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              <div
-                style={{
-                  padding: '14px',
-                  borderRadius: '12px',
-                  backgroundColor: '#f8fafc',
-                  border: '1.5px solid #e2e8f0',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <Smartphone size={24} color="#1a56db" />
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ fontSize: '0.68rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>
-                    Disponível no
-                  </div>
-                  <div style={{ fontSize: '0.88rem', fontWeight: 800, color: '#0f172a' }}>
-                    Google Play
-                  </div>
-                </div>
-              </div>
+        <p className="balloon-modal-text">
+          O aplicativo do <strong>RotaJá</strong> ainda não foi lançado oficialmente nas lojas e está em fase de testes. Em breve estará disponível para download.
+        </p>
 
-              <div
-                style={{
-                  padding: '14px',
-                  borderRadius: '12px',
-                  backgroundColor: '#f8fafc',
-                  border: '1.5px solid #e2e8f0',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <Smartphone size={24} color="#1a56db" />
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ fontSize: '0.68rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>
-                    Disponível na
-                  </div>
-                  <div style={{ fontSize: '0.88rem', fontWeight: 800, color: '#0f172a' }}>
-                    App Store
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Email Direct Access Form */}
-            <form onSubmit={handleSubscribe} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Perfil de Acesso:
-                </label>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <button
-                    type="button"
-                    onClick={() => setPerfil('motorista')}
-                    style={{
-                      flex: 1,
-                      padding: '10px',
-                      borderRadius: '10px',
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      border: perfil === 'motorista' ? '2px solid #1a56db' : '1px solid #cbd5e1',
-                      backgroundColor: perfil === 'motorista' ? '#eff6ff' : '#ffffff',
-                      color: perfil === 'motorista' ? '#1a56db' : '#64748b',
-                    }}
-                  >
-                    <Truck size={14} style={{ display: 'inline', marginRight: '6px' }} />
-                    Motorista
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setPerfil('empresa')}
-                    style={{
-                      flex: 1,
-                      padding: '10px',
-                      borderRadius: '10px',
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      border: perfil === 'empresa' ? '2px solid #1a56db' : '1px solid #cbd5e1',
-                      backgroundColor: perfil === 'empresa' ? '#eff6ff' : '#ffffff',
-                      color: perfil === 'empresa' ? '#1a56db' : '#64748b',
-                    }}
-                  >
-                    <Building2 size={14} style={{ display: 'inline', marginRight: '6px' }} />
-                    Empresa
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Receba o link de instalação no seu e-mail:
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <Mail size={18} color="#94a3b8" style={{ position: 'absolute', left: '14px', top: '14px' }} />
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="seu.email@exemplo.com.br"
-                    style={{
-                      width: '100%',
-                      padding: '12px 14px 12px 42px',
-                      borderRadius: '10px',
-                      border: '1.5px solid #cbd5e1',
-                      fontSize: '0.92rem',
-                      outline: 'none',
-                    }}
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="btn-primary"
-                style={{
-                  width: '100%',
-                  padding: '14px',
-                  borderRadius: '12px',
-                  fontSize: '0.95rem',
-                }}
-              >
-                Garantir Acesso Imediato
-                <ArrowRight size={16} />
-              </button>
-            </form>
-
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '0.78rem', color: '#64748b' }}>
-              <ShieldCheck size={14} color="#10b981" />
-              <span>Seus dados estão protegidos pela LGPD.</span>
-            </div>
-
-          </div>
-        )}
-
+        <button
+          onClick={onClose}
+          className="balloon-modal-btn"
+        >
+          Entendido
+        </button>
       </div>
+
+      <style>{`
+        .balloon-modal-backdrop {
+          position: fixed;
+          inset: 0;
+          z-index: 2000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          background-color: rgba(15, 23, 42, 0.65);
+          backdrop-filter: blur(4px);
+          animation: balloonFade 0.15s ease;
+        }
+
+        .balloon-modal-box {
+          position: relative;
+          width: 100%;
+          max-width: 380px;
+          background-color: #ffffff;
+          border-radius: 20px;
+          padding: 28px 24px 24px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          animation: balloonPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .balloon-modal-close {
+          position: absolute;
+          top: 14px;
+          right: 14px;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: #f1f5f9;
+          border: none;
+          color: #64748b;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.15s ease;
+        }
+        .balloon-modal-close:hover {
+          background: #e2e8f0;
+          color: #0f172a;
+        }
+
+        .balloon-modal-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background-color: #eff6ff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 2px;
+        }
+
+        .balloon-modal-title {
+          font-family: 'Plus Jakarta Sans', Inter, sans-serif;
+          font-size: 1.18rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0;
+          line-height: 1.3;
+        }
+
+        .balloon-modal-text {
+          font-size: 0.9rem;
+          color: #475569;
+          line-height: 1.55;
+          margin: 0 0 6px;
+        }
+
+        .balloon-modal-btn {
+          width: 100%;
+          padding: 12px;
+          border-radius: 12px;
+          background-color: #1a56db;
+          color: #ffffff;
+          font-family: 'Plus Jakarta Sans', Inter, sans-serif;
+          font-size: 0.95rem;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          transition: background 0.15s ease;
+        }
+        .balloon-modal-btn:hover {
+          background-color: #1042b8;
+        }
+
+        @keyframes balloonFade {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes balloonPop {
+          from { opacity: 0; transform: scale(0.92); }
+          to { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
     </div>
   );
 }

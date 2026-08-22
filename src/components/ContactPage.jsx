@@ -48,42 +48,23 @@ export default function ContactPage({ onGoHome }) {
   };
 
   return (
-    <main style={{ backgroundColor: '#f0f7ff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+    <main className="contact-page-main">
       <div className="corporate-container" style={{ maxWidth: '760px' }}>
         <button
           onClick={onGoHome}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'none',
-            border: 'none',
-            color: '#1a56db',
-            fontWeight: 700,
-            fontSize: '0.92rem',
-            cursor: 'pointer',
-            padding: '0 0 24px',
-          }}
+          className="contact-back-btn"
         >
           <ArrowLeft size={18} />
           Voltar para o início
         </button>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '24px',
-            border: '1.5px solid #e2e8f0',
-            boxShadow: '0 16px 40px -8px rgba(15, 23, 42, 0.1)',
-            padding: '48px 44px',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
+        <div className="contact-card">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
             <div
               style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '16px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '14px',
                 backgroundColor: '#eff6ff',
                 display: 'flex',
                 alignItems: 'center',
@@ -91,13 +72,13 @@ export default function ContactPage({ onGoHome }) {
                 flexShrink: 0,
               }}
             >
-              <MessageSquare size={26} color="#1a56db" />
+              <MessageSquare size={24} color="#1a56db" />
             </div>
             <div>
               <h1
                 style={{
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  fontSize: 'clamp(1.7rem, 3vw, 2.3rem)',
+                  fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
                   fontWeight: 800,
                   color: '#0f172a',
                   margin: 0,
@@ -107,31 +88,31 @@ export default function ContactPage({ onGoHome }) {
               </h1>
             </div>
           </div>
-          <p style={{ fontSize: '1rem', color: '#475569', lineHeight: 1.7, marginBottom: '36px' }}>
+          <p style={{ fontSize: '0.96rem', color: '#475569', lineHeight: 1.65, marginBottom: '28px' }}>
             Preencha o formulário abaixo e nossa equipe retornará o mais rápido possível. Escolha o setor que melhor atende a sua necessidade.
           </p>
 
           {sent ? (
-            <div style={{ textAlign: 'center', padding: '48px 24px' }}>
-              <CheckCircle2 size={64} color="#10b981" style={{ marginBottom: '20px' }} />
+            <div style={{ textAlign: 'center', padding: '36px 16px' }}>
+              <CheckCircle2 size={56} color="#10b981" style={{ marginBottom: '16px' }} />
               <h2
                 style={{
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  fontSize: '1.6rem',
+                  fontSize: '1.45rem',
                   fontWeight: 800,
                   color: '#0f172a',
-                  marginBottom: '12px',
+                  marginBottom: '10px',
                 }}
               >
                 Solicitação enviada!
               </h2>
-              <p style={{ fontSize: '1rem', color: '#475569', lineHeight: 1.7, maxWidth: '460px', margin: '0 auto 28px' }}>
+              <p style={{ fontSize: '0.94rem', color: '#475569', lineHeight: 1.65, maxWidth: '460px', margin: '0 auto 24px' }}>
                 Recebemos seus dados, {form.nome || 'cliente'}. Nossa equipe de {form.setor.toLowerCase()} entrará em contato pelo email {form.email || 'informado'} em até 2 horas úteis.
               </p>
               <button
                 onClick={onGoHome}
                 className="btn-primary"
-                style={{ borderRadius: '12px' }}
+                style={{ borderRadius: '12px', width: '100%', maxWidth: '280px' }}
               >
                 Voltar para o início
               </button>
@@ -139,9 +120,9 @@ export default function ContactPage({ onGoHome }) {
           ) : (
             <form onSubmit={handleSubmit}>
               {/* Nome & Sobrenome */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }} className="contact-form-row">
+              <div className="contact-form-row">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
                     Nome *
                   </label>
                   <input
@@ -157,7 +138,7 @@ export default function ContactPage({ onGoHome }) {
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
                     Sobrenome *
                   </label>
                   <input
@@ -175,9 +156,9 @@ export default function ContactPage({ onGoHome }) {
               </div>
 
               {/* Telefone & Email */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }} className="contact-form-row">
+              <div className="contact-form-row">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
                     Telefone / WhatsApp *
                   </label>
                   <input
@@ -193,7 +174,7 @@ export default function ContactPage({ onGoHome }) {
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
                     E-mail *
                   </label>
                   <input
@@ -211,11 +192,11 @@ export default function ContactPage({ onGoHome }) {
               </div>
 
               {/* Setor */}
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>
+              <div style={{ marginBottom: '18px' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
                   Setor *
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }} className="contact-setor-grid">
+                <div className="contact-setor-grid">
                   {SETORES.map((s) => {
                     const Icon = s.icon;
                     const isActive = form.setor === s.value;
@@ -224,24 +205,10 @@ export default function ContactPage({ onGoHome }) {
                         key={s.value}
                         type="button"
                         onClick={() => setForm((prev) => ({ ...prev, setor: s.value }))}
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          gap: '8px',
-                          padding: '16px 8px',
-                          borderRadius: '14px',
-                          border: isActive ? '2px solid #1a56db' : '1.5px solid #cbd5e1',
-                          backgroundColor: isActive ? '#eff6ff' : '#ffffff',
-                          color: isActive ? '#1a56db' : '#475569',
-                          fontWeight: 700,
-                          fontSize: '0.85rem',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s ease',
-                        }}
+                        className={`contact-setor-btn ${isActive ? 'contact-setor-btn--active' : ''}`}
                       >
-                        <Icon size={22} color={isActive ? '#1a56db' : '#94a3b8'} />
-                        {s.label}
+                        <Icon size={20} color={isActive ? '#1a56db' : '#94a3b8'} />
+                        <span>{s.label}</span>
                       </button>
                     );
                   })}
@@ -249,18 +216,18 @@ export default function ContactPage({ onGoHome }) {
               </div>
 
               {/* Mensagem */}
-              <div style={{ marginBottom: '28px' }}>
-                <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>
+              <div style={{ marginBottom: '24px' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
                   Como podemos ajudar? *
                 </label>
                 <textarea
                   name="mensagem"
                   required
-                  rows={6}
+                  rows={5}
                   value={form.mensagem}
                   onChange={handleChange}
                   placeholder="Descreva em detalhes o que você precisa: dúvida, demonstração, suporte técnico, negociação de valores..."
-                  style={{ ...inputStyle, resize: 'vertical', minHeight: '140px', lineHeight: 1.6 }}
+                  style={{ ...inputStyle, resize: 'vertical', minHeight: '120px', lineHeight: 1.6 }}
                   onFocus={(e) => Object.assign(e.currentTarget.style, inputFocusStyle)}
                   onBlur={(e) => Object.assign(e.currentTarget.style, { borderColor: '#cbd5e1', boxShadow: 'none' })}
                 />
@@ -271,9 +238,9 @@ export default function ContactPage({ onGoHome }) {
                 className="btn-primary"
                 style={{
                   width: '100%',
-                  padding: '16px 28px',
-                  fontSize: '1.02rem',
-                  borderRadius: '14px',
+                  padding: '15px 28px',
+                  fontSize: '1rem',
+                  borderRadius: '12px',
                 }}
               >
                 <Send size={18} />
@@ -284,90 +251,136 @@ export default function ContactPage({ onGoHome }) {
         </div>
 
         {/* Direct channels */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginTop: '28px' }} className="contact-channels-grid">
+        <div className="contact-channels-grid">
           <a
             href="https://wa.me/5511999999999"
             target="_blank"
             rel="noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '18px 20px',
-              backgroundColor: '#ffffff',
-              borderRadius: '16px',
-              border: '1.5px solid #e2e8f0',
-              textDecoration: 'none',
-              color: '#0f172a',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              transition: 'all 0.2s ease',
-            }}
+            className="contact-channel-item"
           >
             <PhoneCall size={20} color="#10b981" />
-            WhatsApp Direto
+            <span>WhatsApp Direto</span>
           </a>
           <a
             href="mailto:contato@rotaja.com.br"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '18px 20px',
-              backgroundColor: '#ffffff',
-              borderRadius: '16px',
-              border: '1.5px solid #e2e8f0',
-              textDecoration: 'none',
-              color: '#0f172a',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              transition: 'all 0.2s ease',
-            }}
+            className="contact-channel-item"
           >
             <Mail size={20} color="#1a56db" />
-            contato@rotaja.com.br
+            <span>contato@rotaja.com.br</span>
           </a>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '18px 20px',
-              backgroundColor: '#ffffff',
-              borderRadius: '16px',
-              border: '1.5px solid #e2e8f0',
-              color: '#0f172a',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-            }}
-          >
+          <div className="contact-channel-item">
             <MapPin size={20} color="#334155" />
-            São Paulo, SP
+            <span>São Paulo, SP</span>
           </div>
         </div>
       </div>
 
       <style>{`
+        .contact-page-main {
+          background-color: #f0f7ff;
+          min-height: 100vh;
+          padding-top: 110px;
+          padding-bottom: 70px;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        .contact-back-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: none;
+          border: none;
+          color: #1a56db;
+          font-weight: 700;
+          font-size: 0.92rem;
+          cursor: pointer;
+          padding: 0 0 20px;
+        }
+        .contact-card {
+          background-color: #ffffff;
+          border-radius: 24px;
+          border: 1.5px solid #e2e8f0;
+          box-shadow: 0 16px 40px -8px rgba(15, 23, 42, 0.1);
+          padding: 44px 40px;
+        }
         .contact-form-row {
-          grid-template-columns: 1fr 1fr !important;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 18px;
+          margin-bottom: 18px;
+        }
+        .contact-setor-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+        }
+        .contact-setor-btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          padding: 14px 8px;
+          border-radius: 12px;
+          border: 1.5px solid #cbd5e1;
+          background-color: #ffffff;
+          color: #475569;
+          font-weight: 700;
+          font-size: 0.82rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .contact-setor-btn--active {
+          border: 2px solid #1a56db;
+          background-color: #eff6ff;
+          color: #1a56db;
         }
         .contact-channels-grid {
-          grid-template-columns: repeat(3, 1fr) !important;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+          margin-top: 24px;
         }
-        .contact-channels-grid a:hover {
+        .contact-channel-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 16px 18px;
+          background-color: #ffffff;
+          border-radius: 16px;
+          border: 1.5px solid #e2e8f0;
+          text-decoration: none;
+          color: '#0f172a';
+          font-weight: 700;
+          font-size: 0.88rem;
+          transition: all 0.2s ease;
+        }
+        .contact-channel-item:hover {
           transform: translateY(-2px);
           border-color: #1a56db;
           box-shadow: 0 8px 20px -4px rgba(26, 86, 219, 0.15);
         }
-        @media (max-width: 700px) {
+
+        @media (max-width: 680px) {
+          .contact-page-main {
+            padding-top: 88px;
+            padding-bottom: 40px;
+          }
+          .contact-card {
+            padding: 24px 18px;
+            border-radius: 18px;
+          }
           .contact-form-row {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
           }
           .contact-setor-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
           }
           .contact-channels-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
+            gap: 10px;
           }
         }
       `}</style>

@@ -10,22 +10,22 @@ const slides = [
     image: photoManTruck,
     alt: 'Motorista profissional com van de entregas RotaJá',
     label: 'Motoristas',
-    highlight: 'Fretes justos',
-    rest: 'por um preço que ambos concordam',
+    highlight: 'Preços justos',
+    rest: 'em entregas, frete e cargas',
   },
   {
     image: photoWorkerBoxes,
     alt: 'Entregador transportando caixas e encomendas',
     label: 'Entregas',
-    highlight: 'Entregas rápidas',
-    rest: 'direto ao destino e sem burocracia',
+    highlight: 'Sem burocracia',
+    rest: 'entregas rápidas direto ao destino',
   },
   {
     image: photoTrucksFleet,
     alt: 'Frota pesada de caminhões e carretas azuis',
     label: 'Frota',
     highlight: 'A frota certa',
-    rest: 'para qualquer tamanho de carga',
+    rest: 'para qualquer tamanho de frete',
   },
 ];
 
@@ -64,89 +64,103 @@ export default function Hero({ onOpenDownloadModal }) {
     const tick = setInterval(() => {
       const elapsed = Date.now() - start;
       setSlideProgress(Math.min(100, (elapsed / SLIDE_DURATION) * 100));
-    }, 35);
+    }, 60);
     return () => clearInterval(tick);
   }, [currentSlide]);
 
-  useLayoutEffect(() => {
-    const updateTruckPosition = () => {
-      const tab = tabRefs.current[currentSlide];
-      const nav = navRef.current;
-      if (!tab || !nav) return;
+  const updateTruckPosition = () => {
+    const activeTab = tabRefs.current[currentSlide];
+    const nav = navRef.current;
+    if (activeTab && nav) {
+      const tabRect = activeTab.getBoundingClientRect();
       const navRect = nav.getBoundingClientRect();
-      const tabRect = tab.getBoundingClientRect();
-      setTruckLeft(tabRect.left - navRect.left + tabRect.width / 2);
-    };
+      const relativeLeft = tabRect.left - navRect.left + tabRect.width / 2;
+      setTruckLeft(relativeLeft);
+    }
+  };
 
+  useLayoutEffect(() => {
     updateTruckPosition();
+  }, [currentSlide]);
+
+  useEffect(() => {
     window.addEventListener('resize', updateTruckPosition);
     return () => window.removeEventListener('resize', updateTruckPosition);
   }, [currentSlide]);
 
-  const goToSlide = (index) => {
+  const handleTabClick = (index) => {
     setCurrentSlide(index);
+    setSlideProgress(0);
   };
 
   const activeSlideData = slides[currentSlide];
 
   return (
-    <section id="hero" className="hero-section">
+    <section className="hero-section" id="inicio">
+      {/* Background Slideshow */}
       {slides.map((slide, index) => (
         <div
           key={index}
           className="hero-slide"
           style={{
-            opacity: currentSlide === index ? 1 : 0,
-            transform: currentSlide === index ? 'scale(1)' : 'scale(1.03)',
+            opacity: index === currentSlide ? 1 : 0,
+            transform: index === currentSlide ? 'scale(1)' : 'scale(1.04)',
+            pointerEvents: index === currentSlide ? 'auto' : 'none',
           }}
         >
-          <img src={slide.image} alt={slide.alt} className="hero-slide-img" />
+          <img
+            src={slide.image}
+            alt={slide.alt}
+            className="hero-slide-img"
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
         </div>
       ))}
 
-      {/* Vignette overlay */}
+      {/* Dark Vignette Overlay for maximum readability */}
       <div className="hero-vignette" />
 
-      <div className="corporate-container hero-content-wrapper">
-        <div className="hero-copy">
-          
-          {/* inDrive Style Impactful Headline */}
-          <h1 className="hero-headline">
-            <span className="hero-highlight-tag">{activeSlideData.highlight}</span>
-            <span className="hero-headline-rest">{activeSlideData.rest}</span>
-          </h1>
+      {/* Hero Copy (Left-Aligned, inDrive Style with RotaJá Blue) */}
+      <div className="hero-content-wrapper">
+        <div className="corporate-container">
+          <div className="hero-copy" key={currentSlide}>
+            <h1 className="hero-headline">
+              <span className="hero-highlight-tag">{activeSlideData.highlight}</span>
+              <span className="hero-headline-rest">{activeSlideData.rest}</span>
+            </h1>
 
-          {/* Single Direct inDrive Style CTA */}
-          <div className="hero-cta-wrap">
-            <button onClick={onOpenDownloadModal} className="hero-indrive-cta">
-              Baixar o aplicativo
-            </button>
+            {/* Left-Aligned inDrive Style CTA Pill */}
+            <div className="hero-cta-wrap">
+              <button onClick={onOpenDownloadModal} className="hero-indrive-cta" id="hero-main-cta">
+                Baixar aplicativo
+              </button>
+            </div>
           </div>
-
         </div>
       </div>
 
-      {/* Navegação inDrive — palavras-chave + caminhão com indicador de progresso */}
+      {/* ── Slide nav (inDrive style 3 progress bars) ── */}
       <div className="hero-slide-nav-wrap">
-        <nav className="hero-slide-nav" ref={navRef} aria-label="Slides do hero">
+        <nav className="hero-slide-nav" ref={navRef} aria-label="Slideshow de categorias">
+          {/* Animated Truck Icon running over progress track */}
           <div
             className="hero-slide-truck"
-            style={{ left: truckLeft }}
-            aria-hidden="true"
+            style={{
+              left: `${truckLeft}px`,
+            }}
           >
             <HeroTruckIcon />
           </div>
 
           {slides.map((slide, index) => {
-            const isActive = currentSlide === index;
+            const isActive = index === currentSlide;
             return (
               <button
-                key={slide.label}
-                ref={(el) => { tabRefs.current[index] = el; }}
-                type="button"
+                key={index}
+                ref={(el) => (tabRefs.current[index] = el)}
+                onClick={() => handleTabClick(index)}
                 className={`hero-slide-tab ${isActive ? 'hero-slide-tab--active' : ''}`}
-                onClick={() => goToSlide(index)}
-                aria-current={isActive ? 'true' : undefined}
+                aria-label={`Slide ${index + 1}: ${slide.label}`}
               >
                 <span className="hero-slide-label">{slide.label}</span>
                 <span className="hero-slide-track">
@@ -166,8 +180,8 @@ export default function Hero({ onOpenDownloadModal }) {
       <style>{`
         .hero-section {
           width: 100%;
-          height: 100vh;
-          min-height: 600px;
+          height: 100%;
+          min-height: 640px;
           position: relative;
           overflow: hidden;
           background-color: #060d17;
@@ -191,13 +205,13 @@ export default function Hero({ onOpenDownloadModal }) {
           background: linear-gradient(
             90deg,
             rgba(6, 13, 23, 0.88) 0%,
-            rgba(6, 13, 23, 0.72) 36%,
-            rgba(6, 13, 23, 0.35) 65%,
-            rgba(6, 13, 23, 0.12) 100%
+            rgba(6, 13, 23, 0.70) 45%,
+            rgba(6, 13, 23, 0.35) 75%,
+            rgba(6, 13, 23, 0.15) 100%
           ),
           linear-gradient(
             0deg,
-            rgba(6, 13, 23, 0.82) 0%,
+            rgba(6, 13, 23, 0.85) 0%,
             rgba(6, 13, 23, 0) 35%
           );
           z-index: 2;
@@ -207,45 +221,55 @@ export default function Hero({ onOpenDownloadModal }) {
           z-index: 10;
           left: 0;
           right: 0;
-          top: clamp(140px, 26vh, 230px);
+          top: clamp(140px, 24vh, 230px);
           width: 100%;
           pointer-events: none;
+          padding: 0;
         }
         .hero-copy {
-          max-width: 620px;
+          max-width: 740px;
           display: flex;
           flex-direction: column;
+          align-items: flex-start;
           gap: 28px;
           pointer-events: auto;
           animation: heroFadeIn 0.5s ease;
+          text-align: left;
         }
         .hero-headline {
-          font-family: 'Plus Jakarta Sans', Inter, sans-serif;
-          font-size: clamp(2.4rem, 4.8vw, 4.1rem);
+          font-family: 'Plus Jakarta Sans', Inter, -apple-system, sans-serif;
+          font-size: clamp(2.7rem, 5.2vw, 4.4rem);
           font-weight: 800;
           color: #ffffff;
-          line-height: 1.1;
-          letter-spacing: -0.035em;
+          line-height: 1.08;
+          letter-spacing: -0.04em;
           margin: 0;
+          text-align: left;
         }
         .hero-highlight-tag {
           display: inline-block;
           background: #1a56db;
           color: #ffffff;
-          padding: 3px 16px 7px;
+          padding: 4px 18px 7px;
           border-radius: 10px;
-          box-shadow: 0 6px 22px rgba(26, 86, 219, 0.45);
+          box-shadow: 0 6px 24px rgba(26, 86, 219, 0.45);
           margin-bottom: 8px;
-          font-weight: 800;
-          letter-spacing: -0.03em;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          text-align: left;
         }
         .hero-headline-rest {
           display: block;
           color: #ffffff;
           margin-top: 4px;
-          text-shadow: 0 3px 18px rgba(0, 0, 0, 0.5);
+          text-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
+          text-align: left;
         }
         .hero-cta-wrap {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          width: 100%;
           padding-top: 4px;
         }
         .hero-indrive-cta {
@@ -257,17 +281,20 @@ export default function Hero({ onOpenDownloadModal }) {
           color: #ffffff;
           font-family: 'Plus Jakarta Sans', Inter, sans-serif;
           font-size: 1.08rem;
-          font-weight: 700;
+          font-weight: 800;
           border-radius: 9999px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: none;
           cursor: pointer;
           box-shadow: 0 8px 24px rgba(26, 86, 219, 0.4);
           transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          margin-right: auto;
+          margin-left: 0;
+          white-space: nowrap;
         }
         .hero-indrive-cta:hover {
           background-color: #1042b8;
           transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 12px 32px rgba(26, 86, 219, 0.55);
+          box-shadow: 0 12px 30px rgba(26, 86, 219, 0.55);
         }
         .hero-indrive-cta:active {
           transform: translateY(0) scale(0.98);
@@ -354,26 +381,88 @@ export default function Hero({ onOpenDownloadModal }) {
         }
 
         @media (max-width: 768px) {
+          .hero-section {
+            min-height: 480px;
+          }
           .hero-content-wrapper {
-            top: clamp(110px, 20vh, 180px);
+            top: clamp(75px, 12vh, 105px);
+            padding: 0;
+          }
+          .hero-content-wrapper .corporate-container {
+            padding: 0 16px;
+            max-width: 100%;
+          }
+          .hero-copy {
+            gap: 14px;
+            max-width: 100%;
+            align-items: flex-start;
+            text-align: left;
           }
           .hero-headline {
-            font-size: clamp(2rem, 7.8vw, 2.7rem);
+            font-size: clamp(2.05rem, 8.4vw, 2.75rem);
+            line-height: 1.08;
+            letter-spacing: -0.035em;
+            text-align: left;
+          }
+          .hero-highlight-tag {
+            padding: 3px 10px 5px;
+            border-radius: 6px;
+            font-size: 0.88em;
+            margin-bottom: 4px;
+            text-align: left;
+            box-shadow: 0 3px 12px rgba(26, 86, 219, 0.4);
+          }
+          .hero-headline-rest {
+            text-align: left;
+          }
+          .hero-cta-wrap {
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-top: 4px;
           }
           .hero-indrive-cta {
-            width: 100%;
-            padding: 14px 24px;
-            font-size: 1rem;
+            width: auto;
+            align-self: flex-start;
+            padding: 12px 22px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 10px;
+            margin-right: auto;
+            margin-left: 0;
+            box-shadow: 0 4px 14px rgba(26, 86, 219, 0.35);
           }
           .hero-slide-nav-wrap {
-            padding: 0 16px 20px;
+            padding: 0 14px 16px;
           }
           .hero-slide-nav {
             max-width: 100%;
-            padding-top: 38px;
+            padding-top: 30px;
+          }
+          .hero-slide-tab {
+            padding: 0 6px;
+            gap: 8px;
           }
           .hero-slide-label {
-            font-size: 0.88rem;
+            font-size: 0.84rem;
+          }
+        }
+        @media (max-width: 380px) {
+          .hero-content-wrapper {
+            top: 68px;
+          }
+          .hero-content-wrapper .corporate-container {
+            padding: 0 12px;
+          }
+          .hero-headline {
+            font-size: 1.85rem;
+          }
+          .hero-indrive-cta {
+            padding: 11px 18px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+          }
+          .hero-slide-label {
+            font-size: 0.78rem;
           }
         }
       `}</style>
